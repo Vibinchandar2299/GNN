@@ -26,7 +26,7 @@
 # ================================================================
 # 1. INSTALL
 # ================================================================
-!pip -q install torch-geometric openpyxl scikit-learn matplotlib pandas numpy
+# pip install torch-geometric openpyxl scikit-learn matplotlib pandas numpy
 
 # ================================================================
 # 2. IMPORTS
@@ -111,23 +111,8 @@ else:
 # ================================================================
 # 4. UPLOAD FINAL EXCEL DATASET
 # ================================================================
-from google.colab import files
-
-print("\nUpload your final .xlsx dataset")
-
-uploaded = files.upload()
-
-if not uploaded:
-    raise RuntimeError("No Excel file was uploaded.")
-
-file_name = next(iter(uploaded.keys()))
-
-print("Uploaded file:", file_name)
-
-if not file_name.lower().endswith(".xlsx"):
-    raise ValueError(
-        "Please upload an Excel (.xlsx) workbook."
-    )
+file_name = r"c:\Users\VIBIN\Vibin Projects\GNN\Dataset\GNN_Placement_Dataset.xlsx"
+print("Local file:", file_name)
 
 
 # ================================================================
@@ -372,7 +357,7 @@ if not set(
 
 print("\nTarget distribution:")
 
-display(
+print(
     df[target_column]
     .value_counts()
     .rename("count")
@@ -381,7 +366,7 @@ display(
 
 print("\nTarget proportions:")
 
-display(
+print(
     df[target_column]
     .value_counts(
         normalize=True
@@ -1411,6 +1396,7 @@ class AMRGGraphSAGE(
         super().__init__()
 
         self.layers = nn.ModuleList()
+        self.norms = nn.ModuleList()
 
         self.layers.append(
             RelationAwareWeightedSAGEConv(
@@ -1419,6 +1405,7 @@ class AMRGGraphSAGE(
                 num_relations
             )
         )
+        self.norms.append(nn.LayerNorm(hidden_channels))
 
         for _ in range(
             num_layers - 1
@@ -1431,6 +1418,7 @@ class AMRGGraphSAGE(
                     num_relations
                 )
             )
+            self.norms.append(nn.LayerNorm(hidden_channels))
 
         # Adaptive multi-scale weighting
         self.scale_score = nn.Linear(
@@ -1455,13 +1443,15 @@ class AMRGGraphSAGE(
 
         layer_outputs = []
 
-        for layer in self.layers:
+        for layer, norm in zip(self.layers, self.norms):
 
             x = layer(
                 x,
                 edge_index,
                 edge_type
             )
+            
+            x = norm(x)
 
             x = F.relu(x)
 
@@ -1657,7 +1647,8 @@ def train_model(
     lr=1e-3,
     weight_decay=1e-4,
     ranking_lambda=0.0,
-    patience=15
+    patience=15,
+    pos_weight=1.0
 ):
 
     optimizer = torch.optim.Adam(
@@ -1704,10 +1695,17 @@ def train_model(
             graph.train_mask
         ]
 
-        bce = F.binary_cross_entropy_with_logits(
+        bce_loss = F.binary_cross_entropy_with_logits(
             train_logits,
-            train_labels
+            train_labels,
+            reduction='none'
         )
+        if pos_weight is not None and pos_weight != 1.0:
+            weight = torch.ones_like(train_labels)
+            weight[train_labels == 1] = float(pos_weight)
+            bce = (bce_loss * weight).mean()
+        else:
+            bce = bce_loss.mean()
 
         if ranking_lambda > 0:
 
@@ -1910,20 +1908,21 @@ print("=" * 72)
 
 proposed_model = AMRGGraphSAGE(
     in_channels=data.num_node_features,
-    hidden_channels=64,
+    hidden_channels=128,
     num_relations=len(relation_to_id),
     num_layers=2,
-    dropout=0.30
+    dropout=0.20
 ).to(device)
 
 proposed_model, proposed_history = train_model(
     proposed_model,
     data,
-    epochs=120,
+    epochs=400,
     lr=1e-3,
     weight_decay=1e-4,
-    ranking_lambda=0.20,
-    patience=15
+    ranking_lambda=0.08,
+    patience=50,
+    pos_weight=1.12
 )
 
 (
@@ -1991,7 +1990,7 @@ print(
     "=" * 72
 )
 
-display(comparison)
+print(comparison)
 
 
 # ================================================================
@@ -2066,7 +2065,7 @@ plt.colorbar()
 
 plt.tight_layout()
 
-plt.show()
+plt.close('all')
 
 
 # ================================================================
@@ -2110,7 +2109,7 @@ plt.grid(
 
 plt.tight_layout()
 
-plt.show()
+plt.close('all')
 
 
 # ================================================================
@@ -2154,7 +2153,7 @@ plt.grid(
 
 plt.tight_layout()
 
-plt.show()
+plt.close('all')
 
 
 # ================================================================
@@ -2318,7 +2317,7 @@ ax.set_title(
 
 plt.tight_layout()
 
-plt.show()
+plt.close('all')
 
 
 # ================================================================
@@ -2508,7 +2507,7 @@ ax.set_title(
 
 plt.tight_layout()
 
-plt.show()
+plt.close('all')
 
 
 # ================================================================
@@ -2696,7 +2695,7 @@ ax.set_title(
 
 plt.tight_layout()
 
-plt.show()
+plt.close('all')
 
 
 # ================================================================
