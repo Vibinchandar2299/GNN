@@ -39,6 +39,11 @@ public class PredictionService {
     }
 
     @Transactional
+    public PredictionResponse predictApplication(String applicationId) {
+        return predictApplication(applicationId, null);
+    }
+
+    @Transactional
     public PredictionResponse predictApplication(String applicationId, PredictionRequest request) {
         String cleanAppId = applicationId.trim();
         String modelName = (request != null && request.getModelName() != null) ? request.getModelName() : DEFAULT_MODEL;

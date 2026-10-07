@@ -1,0 +1,3 @@
+com\hiregraph\HireGraphApplicationTests.class
+com\hiregraph\DataIngestionAndConsistencyTest.class
+com\hiregraph\ApiControllerTests.class

@@ -8,15 +8,15 @@ CREATE TABLE IF NOT EXISTS students (
     id BIGSERIAL PRIMARY KEY,
     student_id VARCHAR(50) NOT NULL UNIQUE,
     department VARCHAR(100) NOT NULL,
-    cgpa NUMERIC(4,2) NOT NULL,
+    cgpa DOUBLE PRECISION NOT NULL,
     backlogs INTEGER NOT NULL,
-    aptitude_score_pre NUMERIC(5,2) NOT NULL,
-    coding_score_pre NUMERIC(5,2) NOT NULL,
-    communication_score_pre NUMERIC(5,2) NOT NULL,
+    aptitude_score_pre DOUBLE PRECISION NOT NULL,
+    coding_score_pre DOUBLE PRECISION NOT NULL,
+    communication_score_pre DOUBLE PRECISION NOT NULL,
     projects_count INTEGER NOT NULL,
     internships_count INTEGER NOT NULL,
     certifications_count INTEGER NOT NULL,
-    resume_score NUMERIC(5,2) NOT NULL,
+    resume_score DOUBLE PRECISION NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -28,8 +28,8 @@ CREATE TABLE IF NOT EXISTS companies (
     company_name VARCHAR(150),
     industry VARCHAR(100) NOT NULL,
     company_size VARCHAR(50) NOT NULL,
-    historical_selection_rate NUMERIC(6,4) NOT NULL,
-    historical_average_selected_cgpa NUMERIC(4,2) NOT NULL,
+    historical_selection_rate DOUBLE PRECISION NOT NULL,
+    historical_average_selected_cgpa DOUBLE PRECISION NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -40,9 +40,9 @@ CREATE TABLE IF NOT EXISTS jobs (
     job_id VARCHAR(50) NOT NULL UNIQUE,
     job_title VARCHAR(150) NOT NULL,
     job_domain VARCHAR(100) NOT NULL,
-    minimum_cgpa NUMERIC(4,2) NOT NULL,
+    minimum_cgpa DOUBLE PRECISION NOT NULL,
     experience_required_months INTEGER NOT NULL,
-    salary_lpa NUMERIC(5,2) NOT NULL,
+    salary_lpa DOUBLE PRECISION NOT NULL,
     required_skill_count INTEGER NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS student_skills (
     id BIGSERIAL PRIMARY KEY,
     student_id VARCHAR(50) NOT NULL REFERENCES students(student_id) ON DELETE CASCADE,
     skill_id VARCHAR(50) NOT NULL REFERENCES skills(skill_id) ON DELETE CASCADE,
-    skill_proficiency NUMERIC(4,2),
+    skill_proficiency DOUBLE PRECISION,
     CONSTRAINT uq_student_skill UNIQUE (student_id, skill_id)
 );
 
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS job_skills (
     id BIGSERIAL PRIMARY KEY,
     job_id VARCHAR(50) NOT NULL REFERENCES jobs(job_id) ON DELETE CASCADE,
     skill_id VARCHAR(50) NOT NULL REFERENCES skills(skill_id) ON DELETE CASCADE,
-    required_skill_level NUMERIC(4,2),
+    required_skill_level DOUBLE PRECISION,
     CONSTRAINT uq_job_skill UNIQUE (job_id, skill_id)
 );
 
@@ -82,13 +82,13 @@ CREATE TABLE IF NOT EXISTS applications (
     company_id VARCHAR(50) NOT NULL REFERENCES companies(company_id) ON DELETE CASCADE,
     job_id VARCHAR(50) NOT NULL REFERENCES jobs(job_id) ON DELETE CASCADE,
     cycle INTEGER NOT NULL,
-    relevant_experience_months NUMERIC(5,2) NOT NULL,
+    relevant_experience_months DOUBLE PRECISION NOT NULL,
     total_skill_count INTEGER NOT NULL,
-    average_skill_proficiency NUMERIC(4,2) NOT NULL,
-    role_shift_score NUMERIC(6,4) NOT NULL,
-    skill_match_ratio NUMERIC(6,4) NOT NULL,
-    required_skill_level_gap NUMERIC(6,4) NOT NULL,
-    role_experience_match NUMERIC(6,4) NOT NULL,
+    average_skill_proficiency DOUBLE PRECISION NOT NULL,
+    role_shift_score DOUBLE PRECISION NOT NULL,
+    skill_match_ratio DOUBLE PRECISION NOT NULL,
+    required_skill_level_gap DOUBLE PRECISION NOT NULL,
+    role_experience_match DOUBLE PRECISION NOT NULL,
     expected_hiring_count INTEGER NOT NULL,
     final_status INTEGER NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS applications (
 CREATE TABLE IF NOT EXISTS predictions (
     id BIGSERIAL PRIMARY KEY,
     application_id VARCHAR(50) NOT NULL REFERENCES applications(application_id) ON DELETE CASCADE,
-    predicted_probability NUMERIC(8,6) NOT NULL,
+    predicted_probability DOUBLE PRECISION NOT NULL,
     predicted_status VARCHAR(20) NOT NULL,
     model_name VARCHAR(50) NOT NULL,
     model_version VARCHAR(50) NOT NULL,
@@ -112,11 +112,11 @@ CREATE TABLE IF NOT EXISTS predictions (
 CREATE TABLE IF NOT EXISTS model_benchmarks (
     id BIGSERIAL PRIMARY KEY,
     model_name VARCHAR(100) NOT NULL UNIQUE,
-    accuracy NUMERIC(6,4) NOT NULL,
-    precision_score NUMERIC(6,4) NOT NULL,
-    recall NUMERIC(6,4) NOT NULL,
-    f1_score NUMERIC(6,4) NOT NULL,
-    roc_auc NUMERIC(6,4) NOT NULL,
+    accuracy DOUBLE PRECISION NOT NULL,
+    precision_score DOUBLE PRECISION NOT NULL,
+    recall DOUBLE PRECISION NOT NULL,
+    f1_score DOUBLE PRECISION NOT NULL,
+    roc_auc DOUBLE PRECISION NOT NULL,
     dataset_description VARCHAR(255),
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
