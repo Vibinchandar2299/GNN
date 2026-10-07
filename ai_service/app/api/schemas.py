@@ -1,7 +1,10 @@
 from typing import List, Dict, Any, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
-class HealthResponse(BaseModel):
+class BaseSchema(BaseModel):
+    model_config = ConfigDict(protected_namespaces=())
+
+class HealthResponse(BaseSchema):
     status: str = "UP"
     app_name: str
     model_name: str
@@ -11,14 +14,14 @@ class HealthResponse(BaseModel):
     relations_count: int
     feature_dimension: int
 
-class ResearchResultsMetrics(BaseModel):
+class ResearchResultsMetrics(BaseSchema):
     accuracy: float
     precision: float
     recall: float
     f1: float
     roc_auc: float
 
-class ModelMetadataResponse(BaseModel):
+class ModelMetadataResponse(BaseSchema):
     project_name: str
     research_title: str
     model_name: str
@@ -29,7 +32,7 @@ class ModelMetadataResponse(BaseModel):
     temporal_split: Dict[str, Any]
     explainability: Dict[str, Any]
 
-class PredictionResponse(BaseModel):
+class PredictionResponse(BaseSchema):
     application_id: str
     node_index: int
     model_name: str
@@ -39,20 +42,20 @@ class PredictionResponse(BaseModel):
     decision_support_label: str = Field(description="Standardized research decision-support outcome label")
     disclaimer: str
 
-class BatchPredictionRequest(BaseModel):
+class BatchPredictionRequest(BaseSchema):
     application_ids: List[str]
 
-class BatchPredictionResponse(BaseModel):
+class BatchPredictionResponse(BaseSchema):
     total_requested: int
     predictions: List[Dict[str, Any]]
 
-class GraphNodeDTO(BaseModel):
+class GraphNodeDTO(BaseSchema):
     id: str
     node_index: int
     type: str
     is_center: bool
 
-class GraphLinkDTO(BaseModel):
+class GraphLinkDTO(BaseSchema):
     source: str
     source_type: str
     target: str
@@ -60,13 +63,13 @@ class GraphLinkDTO(BaseModel):
     relation: str
     relation_id: int
 
-class NeighborhoodResponse(BaseModel):
+class NeighborhoodResponse(BaseSchema):
     center_node: Dict[str, Any]
     nodes_count: int
     links_count: int
     nodes: List[GraphNodeDTO]
     links: List[GraphLinkDTO]
 
-class ErrorResponse(BaseModel):
+class ErrorResponse(BaseSchema):
     error: str
     detail: Optional[str] = None
