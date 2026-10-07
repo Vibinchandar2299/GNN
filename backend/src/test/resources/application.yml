@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: hiregraph-backend-test
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/hiregraph_db}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    show-sql: false
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+hiregraph:
+  ai-service:
+    base-url: http://localhost:8000
+    timeout-seconds: 5
+  dataset:
+    path: ../Dataset/GNN_Placement_Dataset.xlsx
+  ingestion:
+    auto-import: false
