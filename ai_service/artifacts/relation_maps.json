@@ -1,0 +1,30 @@
+{
+  "relation_to_id": {
+    "APPLICATION_STUDENT": 0,
+    "STUDENT_APPLICATION": 1,
+    "APPLICATION_COMPANY": 2,
+    "COMPANY_APPLICATION": 3,
+    "APPLICATION_JOB": 4,
+    "JOB_APPLICATION": 5,
+    "OFFERED_BY": 6,
+    "REV_OFFERED_BY": 7,
+    "HAS_SKILL": 8,
+    "REV_HAS_SKILL": 9,
+    "REQUIRES_SKILL": 10,
+    "REV_REQUIRES_SKILL": 11
+  },
+  "id_to_relation": {
+    "0": "APPLICATION_STUDENT",
+    "1": "STUDENT_APPLICATION",
+    "2": "APPLICATION_COMPANY",
+    "3": "COMPANY_APPLICATION",
+    "4": "APPLICATION_JOB",
+    "5": "JOB_APPLICATION",
+    "6": "OFFERED_BY",
+    "7": "REV_OFFERED_BY",
+    "8": "HAS_SKILL",
+    "9": "REV_HAS_SKILL",
+    "10": "REQUIRES_SKILL",
+    "11": "REV_REQUIRES_SKILL"
+  }
+}

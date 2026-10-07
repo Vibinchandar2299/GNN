@@ -1,0 +1,50 @@
+{
+  "project_name": "HireGraph AI",
+  "research_title": "An Explainable AMRG-GraphSAGE Framework for Hiring Pattern Analysis under Evolving Job Requirements",
+  "model_name": "AMRG-GraphSAGE",
+  "model_checkpoint": "AMRG_GraphSAGE_model.pt",
+  "device": "cpu",
+  "verified_research_results": {
+    "Standard_GraphSAGE": {
+      "accuracy": 0.8387,
+      "precision": 0.8443,
+      "recall": 0.8699,
+      "f1": 0.8569,
+      "roc_auc": 0.914
+    },
+    "AMRG_GraphSAGE": {
+      "accuracy": 0.8427,
+      "precision": 0.8493,
+      "recall": 0.8714,
+      "f1": 0.8602,
+      "roc_auc": 0.9142
+    }
+  },
+  "graph_statistics": {
+    "total_nodes": 5977,
+    "application_nodes": 4000,
+    "student_nodes": 1534,
+    "company_nodes": 125,
+    "job_nodes": 300,
+    "skill_nodes": 18,
+    "total_edges": 43044,
+    "relation_types_count": 12,
+    "feature_dimension": 82
+  },
+  "temporal_split": {
+    "training_cycles": [
+      2023,
+      2024
+    ],
+    "validation_cycle": [
+      2025
+    ],
+    "test_cycle": [
+      2026
+    ]
+  },
+  "explainability": {
+    "gnnexplainer_active": false,
+    "status_note": "GNNExplainer encountered PyTorch Geometric edge-gradient compatibility limitations with custom RelationAwareWeightedSAGEConv. Preserved as an extensible component without synthetic explanation fabrication."
+  }
+}
