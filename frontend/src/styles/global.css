@@ -232,4 +232,7 @@ code, .font-mono {
   .top-header {
     padding: 0 16px;
   }
+  .mobile-menu-btn {
+    display: inline-flex !important;
+  }
 }

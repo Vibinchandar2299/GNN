@@ -102,7 +102,7 @@ export const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
           }}
         >
           <Activity size={14} />
-          <span>Spring Boot 3 (Port 8080) Online</span>
+          <span>Spring Boot 3 Backend Online</span>
         </div>
       </div>
     </header>

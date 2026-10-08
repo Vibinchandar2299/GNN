@@ -31,7 +31,7 @@ export const ApplicationsPage: React.FC = () => {
         page,
         size: 15,
         cycle: cycle ? parseInt(cycle, 10) : undefined,
-        finalStatus: status !== '' ? parseInt(status, 10) : undefined,
+        finalStatus: status ? parseInt(status, 10) : undefined,
       });
       setPageData(data);
     } catch (err: any) {

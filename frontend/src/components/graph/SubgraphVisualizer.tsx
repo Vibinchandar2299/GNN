@@ -90,9 +90,7 @@ export const SubgraphVisualizer: React.FC<SubgraphVisualizerProps> = ({
             'font-size': '13px',
             'border-width': 4,
             'border-color': '#ffffff',
-            'shadow-blur': 15,
-            'shadow-color': '#38bdf8',
-            'shadow-opacity': 0.8,
+            'border-opacity': 1,
           },
         },
         {

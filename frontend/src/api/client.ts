@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { ApiErrorResponse } from '../types/common';
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api/v1';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8081/api/v1';
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,
@@ -17,7 +17,7 @@ apiClient.interceptors.response.use(
     let friendlyMessage = 'An unexpected error occurred while communicating with the backend.';
 
     if (!error.response) {
-      friendlyMessage = 'Unable to connect to the HireGraph backend. Please ensure the Spring Boot service is running on port 8080.';
+      friendlyMessage = 'Unable to connect to the HireGraph backend. Please ensure the Spring Boot service is running.';
     } else if (error.response.data && error.response.data.message) {
       friendlyMessage = error.response.data.message;
     } else if (error.response.status === 404) {
