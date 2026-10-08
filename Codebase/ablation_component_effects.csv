@@ -1,0 +1,6 @@
+component,ablated_model,full_model_f1,ablated_model_f1,f1_change,full_model_roc_auc,ablated_model_roc_auc,roc_auc_change,interpretation
+Relation-Aware Aggregation,AMRG-No-Relation,0.85064,0.855083,-0.004443,0.91751,0.917401,0.000109,Ablated model performed better
+Adaptive Neighbor Weighting,AMRG-No-Adaptive-Weighting,0.85064,0.85613,-0.00549,0.91751,0.91595,0.00156,Ablated model performed better
+Feature-Confidence Gating,AMRG-No-Gating,0.85064,0.854093,-0.003453,0.91751,0.913256,0.004254,Ablated model performed better
+Adaptive Multi-Scale Fusion,AMRG-No-MultiScale,0.85064,0.851216,-0.000576,0.91751,0.91672,0.00079,Ablated model performed better
+Pairwise Ranking Loss,AMRG-No-Ranking,0.85064,0.857347,-0.006707,0.91751,0.918501,-0.000991,Ablated model performed better
