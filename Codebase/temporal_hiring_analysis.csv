@@ -1,0 +1,5 @@
+cycle,application_count,selected_count,rejected_count,selection_rate,average_required_skill_count,std_required_skill_count,average_skill_match_ratio,std_skill_match_ratio,average_required_skill_level_gap,std_required_skill_level_gap,average_role_shift_score,average_role_experience_match,average_cgpa,average_salary_lpa,average_experience_required_months
+2023,614,336,278,0.5472,5.257,1.129,0.6171,0.1229,0.9269,0.4469,0.2975,0.8131,7.99,7.94,9.34
+2024,980,546,434,0.5571,5.227,1.05,0.613,0.121,0.8999,0.4313,0.3061,0.8081,8.0,8.02,9.72
+2025,1160,626,534,0.5397,5.188,1.032,0.6143,0.1211,0.8963,0.4359,0.3159,0.7895,8.01,8.07,10.28
+2026,1246,692,554,0.5554,5.177,1.053,0.6172,0.1218,0.8639,0.462,0.3077,0.8094,8.03,8.07,9.78
