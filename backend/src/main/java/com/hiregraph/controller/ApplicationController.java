@@ -43,4 +43,10 @@ public class ApplicationController {
             @RequestBody(required = false) PredictionRequest request) {
         return ResponseEntity.ok(predictionService.predictApplication(applicationId, request));
     }
+
+    @PostMapping("/predict/batch")
+    public ResponseEntity<com.hiregraph.dto.response.BatchPredictionResponse> predictBatch(
+            @RequestBody com.hiregraph.dto.request.BatchPredictionRequest request) {
+        return ResponseEntity.ok(predictionService.predictBatch(request));
+    }
 }

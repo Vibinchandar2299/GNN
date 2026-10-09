@@ -12,8 +12,10 @@ C:\Users\VIBIN\Vibin Projects\GNN\backend\src\main\java\com\hiregraph\controller
 C:\Users\VIBIN\Vibin Projects\GNN\backend\src\main\java\com\hiregraph\controller\JobController.java
 C:\Users\VIBIN\Vibin Projects\GNN\backend\src\main\java\com\hiregraph\controller\ModelController.java
 C:\Users\VIBIN\Vibin Projects\GNN\backend\src\main\java\com\hiregraph\controller\SkillController.java
+C:\Users\VIBIN\Vibin Projects\GNN\backend\src\main\java\com\hiregraph\dto\request\BatchPredictionRequest.java
 C:\Users\VIBIN\Vibin Projects\GNN\backend\src\main\java\com\hiregraph\dto\request\PredictionRequest.java
 C:\Users\VIBIN\Vibin Projects\GNN\backend\src\main\java\com\hiregraph\dto\response\ApplicationResponse.java
+C:\Users\VIBIN\Vibin Projects\GNN\backend\src\main\java\com\hiregraph\dto\response\BatchPredictionResponse.java
 C:\Users\VIBIN\Vibin Projects\GNN\backend\src\main\java\com\hiregraph\dto\response\CandidateResponse.java
 C:\Users\VIBIN\Vibin Projects\GNN\backend\src\main\java\com\hiregraph\dto\response\CompanyResponse.java
 C:\Users\VIBIN\Vibin Projects\GNN\backend\src\main\java\com\hiregraph\dto\response\DashboardSummaryResponse.java
